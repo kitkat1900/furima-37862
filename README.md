@@ -18,17 +18,17 @@
 - has_many :orders
 
 ## itemsテーブル
-| Column          | Type       | Options                        |
-| --------------- | ---------- | ------------------------------ |
-| item_name       | string     | null: false                    |
-| description     | text       | null: false                    |
-| category        | string     | null: false                    |
-| condition       | string     | null: false                    |
-| shipping_method | string     | null: false                    |
-| ships_from      | string     | null: false                    |
-| shipping_date   | string     | null: false                    |
-| price           | integer    | null: false                    |
-| user_id         | references | null: false, foreign_key: true |
+| Column             | Type       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| item_name          | string     | null: false                    |
+| description        | text       | null: false                    |
+| category_id        | integer    | null: false                    |
+| condition_id       | integer    | null: false                    |
+| shipping_method_id | integer    | null: false                    |
+| ships_from_id      | integer    | null: false                    |
+| shipping_date_id   | integer    | null: false                    |
+| price              | integer    | null: false                    |
+| user               | references | null: false, foreign_key: true |
 
 ## Association
 - belongs_to :user
@@ -39,8 +39,8 @@
 | Column    | Type       | Options                        |
 | --------- | ---------- | ------------------------------ |
 | comment   | text       | null: false                    |
-| user_id   | references | null: false, foreign_key: true |
-| item_id   | references | null: false, foreign_key: true |
+| user      | references | null: false, foreign_key: true |
+| item      | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
@@ -49,8 +49,8 @@
 # ordersテーブル
 | Column       | Type       | Options                        |
 | ------------ | ---------- | ------------------------------ |
-| user_id      | references | null: false, foreign_key: true |
-| item_id      | references | null: false, foreign_key: true |
+| user         | references | null: false, foreign_key: true |
+| item         | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
@@ -58,15 +58,15 @@
 - has_one    :shipping_address
 
 # shipping_addressesテーブル
-| Column       | Type       | Options                        |
-| ------------ | ---------- | ------------------------------ |
-| portal_code  | string     | null: false                    |
-| prefecture   | string     | null: false                    |
-| city         | string     | null: false                    |
-| address      | string     | null: false                    |
-| building     | string     |                                |
-| phone_number | string     | null: false                    |
-| order_id     | references | null: false, foreign_key: true |
+| Column        | Type       | Options                        |
+| ------------- | ---------- | ------------------------------ |
+| portal_code   | string     | null: false                    |
+| prefecture_id | integer    | null: false                    |
+| city          | string     | null: false                    |
+| address       | string     | null: false                    |
+| building      | string     |                                |
+| phone_number  | string     | null: false                    |
+| order         | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :order
