@@ -27,28 +27,28 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include "Description can't be blank"
       end
-      it 'category_idが空では登録できない' do
-        @item.category_id = nil
+      it 'カテゴリーに「---」が選択されている場合は出品できない' do
+        @item.category_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include "Category can't be blank"
       end
-      it 'condition_idが空では登録できない' do
-        @item.condition_id = nil
+      it '商品の状態に「---」が選択されている場合は出品できない' do
+        @item.condition_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include "Condition can't be blank"
       end
-      it 'shipping_method_idが空では登録できない' do
-        @item.shipping_method_id = nil
+      it '配送料の負担に「---」が選択されている場合は出品できない' do
+        @item.shipping_method_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include "Shipping method can't be blank"
       end
-      it 'ships_from_idが空では登録できない' do
-        @item.ships_from_id = nil
+      it '発送元の地域に「---」が選択されている場合は出品できない' do
+        @item.ships_from_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include "Ships from can't be blank"
       end
-      it 'shipping_date_idが空では登録できない' do
-        @item.shipping_date_id = nil
+      it '発送までの日数に「---」が選択されている場合は出品できない' do
+        @item.shipping_date_id = 1
         @item.valid?
         expect(@item.errors.full_messages).to include "Shipping date can't be blank"
       end
