@@ -129,6 +129,7 @@
     <ul class='item-lists'>
 
       <li class='list'>
+      <%= link_to "#" do %>
         <% @items.each do |item| %>
         <div class='item-img-content'>
           <%= image_tag item.image, class: "item-img" if item.image.attached? %>
@@ -153,6 +154,7 @@
           </div>
         </div>
         <% end %>
+      <% end %>
       </li>
 
       <% if @items.blank? %>
