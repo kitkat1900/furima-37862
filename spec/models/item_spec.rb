@@ -55,39 +55,38 @@ RSpec.describe Item, type: :model do
       it 'priceが空では登録できない' do
         @item.price = nil
         @item.valid?
-        expect(@item.errors.full_messages).to include "Price can't be blank", "Price には半角数字で¥300~¥9,999,999の間で入力してください"
+        expect(@item.errors.full_messages).to include "Price can't be blank", 'Price には半角数字で¥300~¥9,999,999の間で入力してください'
       end
       it 'priceが300未満では登録できない' do
         @item.price = 299
         @item.valid?
-        expect(@item.errors.full_messages).to include "Price には半角数字で¥300~¥9,999,999の間で入力してください"
+        expect(@item.errors.full_messages).to include 'Price には半角数字で¥300~¥9,999,999の間で入力してください'
       end
       it 'priceが9999999より大きいと登録できない' do
-        @item.price = 10000000
+        @item.price = 10_000_000
         @item.valid?
-        expect(@item.errors.full_messages).to include "Price には半角数字で¥300~¥9,999,999の間で入力してください"
+        expect(@item.errors.full_messages).to include 'Price には半角数字で¥300~¥9,999,999の間で入力してください'
       end
       it 'priceが全角数字では登録できない' do
-        @item.price = "３００"
+        @item.price = '３００'
         @item.valid?
-        expect(@item.errors.full_messages).to include "Price には半角数字で¥300~¥9,999,999の間で入力してください"
+        expect(@item.errors.full_messages).to include 'Price には半角数字で¥300~¥9,999,999の間で入力してください'
       end
       it 'priceが半角英字では登録できない' do
-        @item.price = "threehundred"
+        @item.price = 'threehundred'
         @item.valid?
-        expect(@item.errors.full_messages).to include "Price には半角数字で¥300~¥9,999,999の間で入力してください"
+        expect(@item.errors.full_messages).to include 'Price には半角数字で¥300~¥9,999,999の間で入力してください'
       end
       it 'priceが半角英数混合では登録できない' do
-        @item.price = "300hundred"
+        @item.price = '300hundred'
         @item.valid?
-        expect(@item.errors.full_messages).to include "Price には半角数字で¥300~¥9,999,999の間で入力してください"
+        expect(@item.errors.full_messages).to include 'Price には半角数字で¥300~¥9,999,999の間で入力してください'
       end
       it 'userが紐付いていないと保存できない' do
         @item.user = nil
         @item.valid?
         expect(@item.errors.full_messages).to include('User must exist')
       end
-      
     end
   end
 end
