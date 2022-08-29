@@ -52,7 +52,7 @@ class ItemsController < ApplicationController
   end
 
   def redirect
-    unless current_user == @item.user
+    unless current_user == @item.user && @item.order == nil
       redirect_to root_path
     end
   end

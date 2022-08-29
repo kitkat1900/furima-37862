@@ -1,5 +1,7 @@
 class OrdersController < ApplicationController
   attr_accessor :token
+  before_action :set_item, only: [:index, :create]
+  before_action :authenticate_user!,only: [:index, :create]
 
   def index
     @item = Item.find(params[:item_id])
@@ -25,6 +27,10 @@ class OrdersController < ApplicationController
 
   def order_params
     params.require(:order_shipping_address).permit(:postal_code, :prefecture_id, :city, :address, :building, :phone_number).merge(user_id: current_user.id, item_id: params[:item_id], token: params[:token])
+  end
+
+  def set_item
+    @item = Item.find(params[:id])
   end
 
   def pay_item
