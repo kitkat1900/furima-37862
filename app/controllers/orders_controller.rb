@@ -4,7 +4,6 @@ class OrdersController < ApplicationController
   before_action :authenticate_user!,only: [:index, :create]
 
   def index
-    @item = Item.find(params[:item_id])
     @order_shipping_address = OrderShippingAddress.new
     if current_user == @item.user
       redirect_to root_path
@@ -12,7 +11,6 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @order_shipping_address = OrderShippingAddress.new(order_params)
     if @order_shipping_address.valid?
       pay_item
@@ -30,7 +28,7 @@ class OrdersController < ApplicationController
   end
 
   def set_item
-    @item = Item.find(params[:id])
+    @item = Item.find(params[:item_id])
   end
 
   def pay_item
