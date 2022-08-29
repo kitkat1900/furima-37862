@@ -2,6 +2,7 @@ class OrdersController < ApplicationController
   attr_accessor :token
   before_action :set_item, only: [:index, :create]
   before_action :authenticate_user!,only: [:index, :create]
+  before_action :redirect, only: [:index, :create]
 
   def index
     @order_shipping_address = OrderShippingAddress.new
@@ -38,5 +39,11 @@ class OrdersController < ApplicationController
         card: order_params[:token],    # カードトークン
         currency: 'jpy'                 # 通貨の種類（日本円）
       )
+  end
+
+  def redirect
+    if current_user != @item.user && @item.order != nil
+      redirect_to root_path
+    end
   end
 end
