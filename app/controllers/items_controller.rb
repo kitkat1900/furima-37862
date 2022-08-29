@@ -1,10 +1,10 @@
 class ItemsController < ApplicationController
-  before_action :authenticate_user!,only: [:new, :edit, :destroy]
+  before_action :authenticate_user!, only: [:new, :edit, :destroy]
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :redirect, only: [:edit, :destroy]
-  
+
   def index
-    @items = Item.includes(:user).order("created_at DESC")
+    @items = Item.includes(:user).order('created_at DESC')
   end
 
   def new
@@ -13,7 +13,7 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-  
+
     if @item.save
       redirect_to root_path
     else
@@ -36,15 +36,14 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    if @item.destroy
-      redirect_to root_path
-    end
+    redirect_to root_path if @item.destroy
   end
 
   private
 
   def item_params
-    params.require(:item).permit(:item_name, :description, :category_id, :condition_id,:shipping_method_id, :ships_from_id, :shipping_date_id, :price, :image).merge(user_id: current_user.id)
+    params.require(:item).permit(:item_name, :description, :category_id, :condition_id, :shipping_method_id, :ships_from_id,
+                                 :shipping_date_id, :price, :image).merge(user_id: current_user.id)
   end
 
   def set_item
@@ -52,8 +51,6 @@ class ItemsController < ApplicationController
   end
 
   def redirect
-    unless current_user == @item.user && @item.order == nil
-      redirect_to root_path
-    end
+    redirect_to root_path unless current_user == @item.user && @item.order.nil?
   end
 end

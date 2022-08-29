@@ -6,7 +6,7 @@ RSpec.describe OrderShippingAddress, type: :model do
       user = FactoryBot.create(:user)
       item = FactoryBot.create(:item)
       @order_shipping_address = FactoryBot.build(:order_shipping_address, item_id: item.id, user_id: user.id)
-      sleep 0.1 
+      sleep 0.1
     end
 
     context '内容に問題ない場合' do
@@ -53,17 +53,17 @@ RSpec.describe OrderShippingAddress, type: :model do
       it 'phone_numberが9桁だと保存できないこと' do
         @order_shipping_address.phone_number = '090123456'
         @order_shipping_address.valid?
-        expect(@order_shipping_address.errors.full_messages).to include "Phone number is invalid"
+        expect(@order_shipping_address.errors.full_messages).to include 'Phone number is invalid'
       end
       it 'phone_numberが12桁だと保存できないこと' do
         @order_shipping_address.phone_number = '090123456789'
         @order_shipping_address.valid?
-        expect(@order_shipping_address.errors.full_messages).to include "Phone number is invalid"
+        expect(@order_shipping_address.errors.full_messages).to include 'Phone number is invalid'
       end
       it 'phone_numberがハイフンを含むと保存できないこと' do
         @order_shipping_address.phone_number = '090-1234-5678'
         @order_shipping_address.valid?
-        expect(@order_shipping_address.errors.full_messages).to include "Phone number is invalid"
+        expect(@order_shipping_address.errors.full_messages).to include 'Phone number is invalid'
       end
       it 'itemが紐付いていないと保存できないこと' do
         @order_shipping_address.item_id = nil
