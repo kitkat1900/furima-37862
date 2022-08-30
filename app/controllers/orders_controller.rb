@@ -1,6 +1,4 @@
 class OrdersController < ApplicationController
-  attr_accessor :token
-
   before_action :set_item, only: [:index, :create]
   before_action :authenticate_user!, only: [:index, :create]
   before_action :redirect, only: [:index, :create]

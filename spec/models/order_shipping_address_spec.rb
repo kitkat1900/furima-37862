@@ -13,7 +13,7 @@ RSpec.describe OrderShippingAddress, type: :model do
       it 'すべての値が正しく入力されていれば保存できること' do
         expect(@order_shipping_address).to be_valid
       end
-      it 'buildingは空でも保存できること' do
+      it '建物名は空でも保存できること' do
         @order_shipping_address.building = nil
         expect(@order_shipping_address).to be_valid
       end
@@ -25,42 +25,47 @@ RSpec.describe OrderShippingAddress, type: :model do
         @order_shipping_address.valid?
         expect(@order_shipping_address.errors.full_messages).to include "Token can't be blank"
       end
-      it 'postal_codeが空だと保存できないこと' do
+      it '郵便番号が空だと保存できないこと' do
         @order_shipping_address.postal_code = nil
         @order_shipping_address.valid?
         expect(@order_shipping_address.errors.full_messages).to include "Postal code can't be blank"
       end
-      it 'postal_codeが半角のハイフンを含んだ正しい形式でないと保存できないこと' do
+      it '郵便番号が半角のハイフンを含んだ正しい形式でないと保存できないこと' do
         @order_shipping_address.postal_code = '1234567'
         @order_shipping_address.valid?
         expect(@order_shipping_address.errors.full_messages).to include 'Postal code is invalid. Include hyphen(-)'
       end
-      it 'prefecture_idに「---」が選択されている場合は保存できないこと' do
+      it '都道府県に「---」が選択されている場合は保存できないこと' do
         @order_shipping_address.prefecture_id = 1
         @order_shipping_address.valid?
         expect(@order_shipping_address.errors.full_messages).to include "Prefecture can't be blank"
       end
-      it 'addressが空だと保存できないこと' do
+      it '市町村が空だと保存できないこと' do
+        @order_shipping_address.city = nil
+        @order_shipping_address.valid?
+        expect(@order_shipping_address.errors.full_messages).to include "City can't be blank"
+      end
+      it '番地が空だと保存できないこと' do
         @order_shipping_address.address = nil
         @order_shipping_address.valid?
         expect(@order_shipping_address.errors.full_messages).to include "Address can't be blank"
       end
-      it 'phone_numberが空だと保存できないこと' do
+      it '電話番号が空だと保存できないこと' do
         @order_shipping_address.phone_number = nil
         @order_shipping_address.valid?
         expect(@order_shipping_address.errors.full_messages).to include "Phone number can't be blank"
       end
-      it 'phone_numberが9桁だと保存できないこと' do
+      it '電話番号が9桁だと保存できないこと' do
         @order_shipping_address.phone_number = '090123456'
         @order_shipping_address.valid?
         expect(@order_shipping_address.errors.full_messages).to include 'Phone number is invalid'
       end
-      it 'phone_numberが12桁だと保存できないこと' do
+      it '電話番号が12桁だと保存できないこと' do
         @order_shipping_address.phone_number = '090123456789'
         @order_shipping_address.valid?
         expect(@order_shipping_address.errors.full_messages).to include 'Phone number is invalid'
       end
-      it 'phone_numberがハイフンを含むと保存できないこと' do
+      it '電話番号がハイフンを含むと保存できないこと' do
         @order_shipping_address.phone_number = '090-1234-5678'
         @order_shipping_address.valid?
         expect(@order_shipping_address.errors.full_messages).to include 'Phone number is invalid'
