@@ -4,11 +4,11 @@ class Category < ActiveHash::Base
     { id: 2, name: 'メンズ' },
     { id: 3, name: 'レディース' },
     { id: 4, name: 'ベビー・キッズ' },
-    { id: 5, name: 'インテリア・住まい・小物、本・音楽・ゲーム' },
-    { id: 6, name: 'おもちゃ・ホビー・グッズ' },
-    { id: 7, name: '家電・スマホ・カメラ' },
-    { id: 8, name: 'スポーツ・レジャー' },
-    { id: 9, name: 'グルメ' },
+    { id: 5, name: 'インテリア・住まい・小物' },
+    { id: 6, name: '本・音楽・ゲーム' },
+    { id: 7, name: 'おもちゃ・ホビー・グッズ' },
+    { id: 8, name: '家電・スマホ・カメラ' },
+    { id: 9, name: 'スポーツ・レジャー' },
     { id: 10, name: 'ハンドメイド' },
     { id: 11, name: 'その他' }
   ]
@@ -16,3 +16,6 @@ class Category < ActiveHash::Base
   include ActiveHash::Associations
   has_many :items
 end
+
+
+---、メンズ、レディース、ベビー・キッズ、インテリア・住まい・小物、本・音楽・ゲーム、おもちゃ・ホビー・グッズ、家電・スマホ・カメラ、スポーツ・レジャー、ハンドメイド、その他
